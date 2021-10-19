@@ -17,7 +17,8 @@ COLORS = [RED, BLUE, YELLOW, GREEN, MAGENTA, CYAN]
 x=0
 y=0
 r=0
-A=[]
+A=[0,0,0,0,0,0,0,0,0,0]
+B=[]
 dx=0
 dy=0
 number = 0
@@ -32,14 +33,20 @@ def new_balls():
         color = COLORS[randint(0, 5)]
         dx = randint(-5,5)
         dy = randint(-5, 5)
-        A.append([x,y,r,color,dx,dy])
+        A[i]=[x,y,r,color,dx,dy]
     for i in range(10):
         circle(screen, A[i][3], (A[i][0], A[i][1]), A[i][2])
+
+def new_balls2():
+    for i in range(10):
+        circle(screen, A[i][3], (A[i][0], A[i][1]), A[i][2])
+
+
 
 pygame.display.update()
 clock = pygame.time.Clock()
 finished = False
-
+new_balls()
 while not finished:
     clock.tick(FPS)
     for event in pygame.event.get():
@@ -56,7 +63,8 @@ while not finished:
                     A[i][3] = COLORS[randint(0, 5)]
                     A[i][4] = randint(-5, 5)
                     A[i][5] = randint(-5, 5)
-    new_balls()
+    new_balls2()
+    
     for i in range(10):
         if A[i][0] < (900 - A[i][2]) and A[i][0] > A[i][2] and A[i][1] < (700 - A[i][2]) and A[i][1] > A[i][2]:
             A[i][0] = A[i][0] + A[i][4]
@@ -73,4 +81,5 @@ while not finished:
     pygame.display.update()
     screen.fill(BLACK)
 print('Ваш счёт:', number)
+print(len(A))
 pygame.quit()
